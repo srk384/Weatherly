@@ -836,6 +836,9 @@
   .min-h-\[88vh\] {
     min-height: 88vh;
   }
+  .min-h-\[100vh\] {
+    min-height: 100vh;
+  }
   .min-h-full {
     min-height: 100%;
   }
@@ -869,8 +872,29 @@
   .max-w-screen {
     max-width: 100vw;
   }
+  .min-w-\[20vw\] {
+    min-width: 20vw;
+  }
+  .min-w-\[30\%\] {
+    min-width: 30%;
+  }
+  .min-w-\[30vw\] {
+    min-width: 30vw;
+  }
+  .min-w-\[50vw\] {
+    min-width: 50vw;
+  }
+  .min-w-\[60vw\] {
+    min-width: 60vw;
+  }
   .min-w-\[70\%\] {
     min-width: 70%;
+  }
+  .min-w-\[70vw\] {
+    min-width: 70vw;
+  }
+  .min-w-full {
+    min-width: 100%;
   }
   .min-w-screen {
     min-width: 100vw;
@@ -1545,6 +1569,12 @@
   .bg-\[\#0088cc\] {
     background-color: #0088cc;
   }
+  .bg-\[\#140303\] {
+    background-color: #140303;
+  }
+  .bg-\[\#640808\] {
+    background-color: #640808;
+  }
   .bg-\[\#f6f6f6\] {
     background-color: #f6f6f6;
   }
@@ -1792,10 +1822,6 @@
   .align-top {
     vertical-align: top;
   }
-  .text-2xl {
-    font-size: var(--text-2xl);
-    line-height: var(--tw-leading, var(--text-2xl--line-height));
-  }
   .text-3xl {
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
@@ -1831,10 +1857,6 @@
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
-  }
-  .font-extrabold {
-    --tw-font-weight: var(--font-weight-extrabold);
-    font-weight: var(--font-weight-extrabold);
   }
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
@@ -2445,9 +2467,39 @@
       display: none;
     }
   }
+  .md\:min-h-\[70\%\] {
+    @media (width >= 48rem) {
+      min-height: 70%;
+    }
+  }
+  .md\:min-h-\[90\%\] {
+    @media (width >= 48rem) {
+      min-height: 90%;
+    }
+  }
+  .md\:min-h-\[100\%\] {
+    @media (width >= 48rem) {
+      min-height: 100%;
+    }
+  }
   .md\:w-\[300px\] {
     @media (width >= 48rem) {
       width: 300px;
+    }
+  }
+  .md\:min-w-\[30\%\] {
+    @media (width >= 48rem) {
+      min-width: 30%;
+    }
+  }
+  .md\:min-w-\[70\%\] {
+    @media (width >= 48rem) {
+      min-width: 70%;
+    }
+  }
+  .md\:min-w-\[80\%\] {
+    @media (width >= 48rem) {
+      min-width: 80%;
     }
   }
   .md\:gap-5 {
