@@ -2,13 +2,9 @@ const apiKey = '17036001fc110638901fcc2368c9f15f'
 const cityInput = document.getElementById("cityInput")
 const suggestionsDiv = document.querySelector('.suggestions')
 const locationBtn = document.getElementById("locationBtn")
-cityInput.addEventListener('input', async (e) => {
-    let query = e.target.value
-    if (!query) {
-        suggestionsDiv.innerHTML = '';
-        return;
-    }
 
+async function searchCity(query) {   
+    // if (!query) suggestionsDiv.innerHTML = '';
     let response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`)
     let cities = await response.json()
 
@@ -17,9 +13,23 @@ cityInput.addEventListener('input', async (e) => {
             `<div class="suggestion-item p-2 hover:cursor-pointer hover:bg-[#eeeded]" data-lat="${city.lat}" data-lon="${city.lon}" data-city="${city.name}">
              ${city.name}, ${city.country}
            </div>`
-    )
-        .join('');
-})
+    ).join('');
+}
+
+function debounce(func, delay) {
+    let timeoutId;
+    return function (...args) {       
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);           
+        }, delay);       
+    };
+}
+
+const debouncedFetch = debounce(searchCity, 500); // 500ms delay
+
+cityInput.addEventListener('input', (e) => debouncedFetch(e.target.value))
+
 suggestionsDiv.addEventListener('click', (item) => {
 
     let lat = item.target.dataset.lat;
@@ -33,10 +43,8 @@ suggestionsDiv.addEventListener('click', (item) => {
 })
 
 document.addEventListener('click', (e) => {
-    if (!suggestionsDiv.contains(e.target)) {
-        suggestionsDiv.innerHTML = '';
-    }
-})
+    if (!suggestionsDiv.contains(e.target)) suggestionsDiv.innerHTML = ''
+});
 //  default location ( Delhi, India)
 let currentLat = "28.6139";
 let currentLon = "77.2090";
@@ -44,7 +52,7 @@ let currentCityName = "Delhi";
 
 // Function to get GPS location
 
-locationBtn.addEventListener('click', () => getUserLocation())
+locationBtn.addEventListener('click', getUserLocation)
 
 function getUserLocation() {
     if (navigator.geolocation) {
@@ -74,14 +82,12 @@ async function updWeather(lat, lon, cityName) {
     let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
     let currWeather = await response.json()
 
-
     let apiObj = {
         dt: currWeather.dt,
         timezone: currWeather.timezone
     }
 
     dateTimeGreet(apiObj)
-
 
     cityName = cityName ?? currWeather.name
 
