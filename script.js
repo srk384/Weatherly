@@ -2,9 +2,19 @@ const apiKey = '17036001fc110638901fcc2368c9f15f'
 const cityInput = document.getElementById("cityInput")
 const suggestionsDiv = document.querySelector('.suggestions')
 const locationBtn = document.getElementById("locationBtn")
+<<<<<<< HEAD
 
 async function searchCity(query) {   
     // if (!query) suggestionsDiv.innerHTML = '';
+=======
+cityInput.addEventListener('input', async (e) => {
+    let query = e.target.value
+    if (!query) {
+        suggestionsDiv.innerHTML = '';
+        return;
+    }
+
+>>>>>>> d8afc6221f9764cc8bdc37cd97ade40a0fdb6c5a
     let response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`)
     let cities = await response.json()
 
@@ -13,6 +23,7 @@ async function searchCity(query) {
             `<div class="suggestion-item p-2 hover:cursor-pointer hover:bg-[#eeeded]" data-lat="${city.lat}" data-lon="${city.lon}" data-city="${city.name}">
              ${city.name}, ${city.country}
            </div>`
+<<<<<<< HEAD
     ).join('');
 }
 
@@ -30,6 +41,11 @@ const debouncedFetch = debounce(searchCity, 500); // 500ms delay
 
 cityInput.addEventListener('input', (e) => debouncedFetch(e.target.value))
 
+=======
+    )
+        .join('');
+})
+>>>>>>> d8afc6221f9764cc8bdc37cd97ade40a0fdb6c5a
 suggestionsDiv.addEventListener('click', (item) => {
 
     let lat = item.target.dataset.lat;
@@ -43,8 +59,16 @@ suggestionsDiv.addEventListener('click', (item) => {
 })
 
 document.addEventListener('click', (e) => {
+<<<<<<< HEAD
     if (!suggestionsDiv.contains(e.target)) suggestionsDiv.innerHTML = ''
 });
+=======
+    if (!suggestionsDiv.contains(e.target)) {
+        suggestionsDiv.innerHTML = '';
+        cityInput.value='';
+    }
+})
+>>>>>>> d8afc6221f9764cc8bdc37cd97ade40a0fdb6c5a
 //  default location ( Delhi, India)
 let currentLat = "28.6139";
 let currentLon = "77.2090";
@@ -52,7 +76,11 @@ let currentCityName = "Delhi";
 
 // Function to get GPS location
 
+<<<<<<< HEAD
 locationBtn.addEventListener('click', getUserLocation)
+=======
+locationBtn.addEventListener('click', () => getUserLocation())
+>>>>>>> d8afc6221f9764cc8bdc37cd97ade40a0fdb6c5a
 
 function getUserLocation() {
     if (navigator.geolocation) {
@@ -82,6 +110,10 @@ async function updWeather(lat, lon, cityName) {
     let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
     let currWeather = await response.json()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d8afc6221f9764cc8bdc37cd97ade40a0fdb6c5a
     let apiObj = {
         dt: currWeather.dt,
         timezone: currWeather.timezone
@@ -89,6 +121,10 @@ async function updWeather(lat, lon, cityName) {
 
     dateTimeGreet(apiObj)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d8afc6221f9764cc8bdc37cd97ade40a0fdb6c5a
     cityName = cityName ?? currWeather.name
 
     document.querySelectorAll(".temp").forEach(e => e.innerHTML = Math.floor(currWeather.main.temp) + "&deg;");
